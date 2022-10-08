@@ -261,7 +261,7 @@ class Data extends React.Component<{}, State> {
             case HandType.OTHER: // その他
                 t = "20符 + " + total + "符 → "
                 total += 20;
-                t = t + (Math.ceil((total + 20) / 10) * 10) + "符";
+                t = t + (Math.ceil(total / 10) * 10) + "符";
                 break;
 
             case HandType.ALL_RUNS: // ピンフ
