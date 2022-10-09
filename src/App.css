@@ -37,3 +37,23 @@
         transform: rotate(360deg);
     }
 }
+
+.result {
+    width: 100%;
+    background-color: darkcyan;
+}
+
+.multiline_text {
+    background-color: grey;
+    white-space: pre-line;
+}
+
+.score_board {
+    width: 100%;
+    background-color: grey;
+}
+
+.score_list {
+    width: 100%;
+    background-color: darkgray;
+}
