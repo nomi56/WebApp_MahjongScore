@@ -164,13 +164,12 @@ class Data extends React.Component<{}, State> {
 
     // ボタングループ表示
     RenderButtons(header: string, state: number, name_list: string[], result: string[], callback: (no: number) => void) {
-        return (<tr>
-            <td align="right" width="20%">
+        return (<tr className="button_group">
+            <td align="right">
                 {header}
             </td>
-            <td align="left" width="50%">
+            <td align="left">
                 {name_list.map((name, index) => {
-                    console.log(index, state, name)
                     return (<input
                         type="button"
                         value={name}
@@ -225,12 +224,10 @@ class Data extends React.Component<{}, State> {
 
     SetHandType(h: HandType) {
         this.setState({ hand_type: h }, () => { this.UpdatePoint() })
-        //    this.forceUpdate()
     }
 
     SetWaitType(t: WaitType) {
         this.setState({ wait_type: t }, () => { this.UpdatePoint() })
-        //    this.forceUpdate()
     }
 
     SetFinishType(t: FinishType) {
