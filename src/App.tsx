@@ -4,8 +4,8 @@ import './App.css';
 
 enum HandType {
     OTHER,
-    SEVNE_PAIRS, // 七対子
     ALL_RUNS, // ピンフ
+    SEVNE_PAIRS, // 七対子
 }
 
 enum WaitType {
@@ -92,7 +92,6 @@ type State = {
     is_dealer: boolean
     counter: number[]
     result: string
-    score_list: string
 }
 
 
@@ -107,7 +106,6 @@ class Data extends React.Component<{}, State> {
             is_dealer: false,
             result: "0符",
             counter: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            score_list: "test<br>aaa"
         }
     }
 
@@ -116,80 +114,9 @@ class Data extends React.Component<{}, State> {
             <>
                 <table>
                     <tbody>
-                        <tr>
-                            <td>
-                                手役：
-                                <input
-                                    type="button"
-                                    value="その他"
-                                    onClick={() => this.SetHandType(HandType.OTHER)}
-                                />
-                                <input
-                                    type="button"
-                                    value="ピンフ"
-                                    onClick={() => this.SetHandType(HandType.ALL_RUNS)}
-                                />
-                                <input
-                                    type="button"
-                                    value="チートイ"
-                                    onClick={() => this.SetHandType(HandType.SEVNE_PAIRS)}
-                                />
-                            </td>
-                            <td align="left">
-                                {["その他", "七対子", "ピンフ"][this.state.hand_type]}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                待ち：
-                                <input
-                                    type="button"
-                                    value="両面"
-                                    onClick={() => this.SetWaitType(WaitType.TWO_GATE)}
-                                />
-                                <input
-                                    type="button"
-                                    value="嵌張"
-                                    onClick={() => this.SetWaitType(WaitType.MIDDLE)}
-                                />
-                                <input
-                                    type="button"
-                                    value="辺張"
-                                    onClick={() => this.SetWaitType(WaitType.OUTSIDE)}
-                                />
-                                <input
-                                    type="button"
-                                    value="単騎"
-                                    onClick={() => this.SetWaitType(WaitType.SINGLE)}
-                                />
-                            </td>
-                            <td align="left">
-                                {["両面 0符", "嵌張 2符", "辺張 2符", "単騎 2符"][this.state.wait_type]}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                上り形：
-                                <input
-                                    type="button"
-                                    value="鳴きロン"
-                                    onClick={() => this.SetFinishType(FinishType.OPEN_HAND_RON)}
-                                />
-                                <input
-                                    type="button"
-                                    value="面前ロン"
-                                    onClick={() => this.SetFinishType(FinishType.CLOSE_HAND_RON)}
-                                />
-                                <input
-                                    type="button"
-                                    value="ツモ"
-                                    onClick={() => this.SetFinishType(FinishType.TSUMO)}
-                                />
-                            </td>
-                            <td align="left">
-                                {["鳴きロン 0符", "面前ロン 10符", "ツモ 2符"][this.state.finish_type]}
-                            </td>
-                        </tr>
+                        {this.RenderButtons("手役：", this.state.hand_type, ["その他", "ピンフ", "七対子"], ["基本20符", "20/30符固定", "25符固定"], (no) => this.SetHandType(no))}
+                        {this.RenderButtons("待ち：", this.state.wait_type, ["両面", "嵌張", "辺張", "単騎"], ["0符", "2符", "2符", "2符"], (no) => this.SetWaitType(no))}
+                        {this.RenderButtons("上り形：", this.state.finish_type, ["鳴きロン", "面前ロン", "ツモ"], ["0符", "10符", "2符"], (no) => this.SetFinishType(no))}
                         <tr style={{ height: 10 }} />
                     </tbody>
                 </table>
@@ -233,6 +160,30 @@ class Data extends React.Component<{}, State> {
                 <p />
             </>
         )
+    }
+
+    // ボタングループ表示
+    RenderButtons(header: string, state: number, name_list: string[], result: string[], callback: (no: number) => void) {
+        return (<tr>
+            <td align="right">
+                {header}
+            </td>
+            <td align="left">
+                {name_list.map((name, index) => {
+                    console.log(index, state, name)
+                    return (<input
+                        type="button"
+                        value={name}
+                        onClick={() => { callback(index) }}
+                        className={state == index ? "highlight_button" : "normal_button"}
+                    />
+                    )
+                })}
+            </td>
+            <td width="40%">
+                {result[state]}
+            </td>
+        </tr>)
     }
 
     // 面子を表示

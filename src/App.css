@@ -62,3 +62,10 @@
     width: 100%;
     background-color: darkgray;
 }
+
+.highlight_button {
+    background-color: palevioletred
+}
+
+.normal_button {
+}
