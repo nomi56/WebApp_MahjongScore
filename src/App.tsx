@@ -165,10 +165,10 @@ class Data extends React.Component<{}, State> {
     // ボタングループ表示
     RenderButtons(header: string, state: number, name_list: string[], result: string[], callback: (no: number) => void) {
         return (<tr>
-            <td align="right">
+            <td align="right" width="20%">
                 {header}
             </td>
-            <td align="left">
+            <td align="left" width="50%">
                 {name_list.map((name, index) => {
                     console.log(index, state, name)
                     return (<input
@@ -180,7 +180,7 @@ class Data extends React.Component<{}, State> {
                     )
                 })}
             </td>
-            <td width="40%">
+            <td width="30%">
                 {result[state]}
             </td>
         </tr>)
