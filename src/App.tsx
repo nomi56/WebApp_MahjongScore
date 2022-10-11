@@ -179,7 +179,7 @@ class Data extends React.Component<{}, State> {
                     )
                 })}
             </td>
-            <td width="30%">
+            <td width="40%">
                 {result[state]}
             </td>
         </tr>)
