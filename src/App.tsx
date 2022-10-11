@@ -190,7 +190,11 @@ class Data extends React.Component<{}, State> {
                                 {["鳴きロン 0符", "面前ロン 10符", "ツモ 2符"][this.state.finish_type]}
                             </td>
                         </tr>
-                        <tr style={{ height: 20 }} />
+                        <tr style={{ height: 10 }} />
+                    </tbody>
+                </table>
+                <table>
+                    <tbody>
                         {this.RenderMemberRow(SetType.PUNG)}
                         {this.RenderMemberRow(SetType.CONCEALED_PUNG)}
                         {this.RenderMemberRow(SetType.TERMINAL_PUNG)}
@@ -231,6 +235,7 @@ class Data extends React.Component<{}, State> {
         )
     }
 
+    // 面子を表示
     RenderMemberRow(type: SetType) {
         return (
             <tr>
@@ -240,15 +245,19 @@ class Data extends React.Component<{}, State> {
                         value=" － "
                         onClick={() => this.CalcSetCount(type, -1)}
                     />
-                    &emsp;{set_info[type].disp_name}&emsp;
+                </td>
+                <td>
+                    &nbsp;{set_info[type].disp_name}&nbsp;
+                </td>
+                <td>
                     <input
                         type="button"
                         value=" ＋ "
                         onClick={() => this.CalcSetCount(type, 1)}
                     />
                 </td>
-                <td align="left">
-                    {set_info[type].score + "符 × " + this.state.counter[type]}
+                <td align="right">
+                    &emsp;{set_info[type].score + "符 × " + this.state.counter[type]}
                 </td>
             </tr>)
     }
@@ -350,7 +359,7 @@ function App() {
         <div className="App">
             <header className="App-header">
                 {/*<img src={logo} className="App-logo" alt="logo" />*/}
-                <a>符数計算</a>
+                <a className="title">符数計算</a>
                 <Data />
             </header>
         </div>
